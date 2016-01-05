@@ -15,3 +15,8 @@ protocol Screen
     */
     func isVisible() -> Bool
 }
+
+protocol PoppableScreen : Screen
+{
+    func pop()
+}

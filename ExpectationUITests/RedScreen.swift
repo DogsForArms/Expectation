@@ -9,8 +9,6 @@
 import Foundation
 import XCTest
 
-
-
 class RedScreen : Screen
 {
     func pop()
@@ -19,7 +17,8 @@ class RedScreen : Screen
     }
     func isVisible() -> Bool
     {
-        return app.any["RedScreen"].exists
+        let redExists = app.any["RedScreen"].exists
+        return redExists
     }
 
     

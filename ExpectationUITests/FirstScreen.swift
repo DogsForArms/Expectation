@@ -25,7 +25,7 @@ class FirstScreen : Screen
         return container.exists
     }
     
-    func tapGoSomeplace() -> Screen
+    func tapGoSomeplace() -> [Expectation]
     {
         goSomeplace.tap()
         //create expectation now to see where I go
@@ -38,9 +38,6 @@ class FirstScreen : Screen
             return Expectation(withCondition: screen.isVisible, otherData: screen)
         }
 
-        
-        let expectation = waitForFirstValidExpectation(expectationsForScreens)
-        XCTAssertNotNil(expectation)
-        return expectation!.otherData as! Screen
+        return waitForFirstValidExpectation(expectationsForScreens, maxTime: 60*10)
     }
 }

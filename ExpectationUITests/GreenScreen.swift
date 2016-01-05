@@ -9,22 +9,15 @@
 import Foundation
 import XCTest
 
-
-protocol PoppableScreen : Screen
-{
-    typealias PopReturnType
-    func pop() -> PopReturnType
-}
-
 class GreenScreen : PoppableScreen
 {
-    typealias PopReturnType = String
-    func pop() -> String
+    func pop()
     {
-        return "aw yea"
+        app.navigationBars.buttons.elementBoundByIndex(0).tap()
     }
     func isVisible() -> Bool
     {
-        return app.any["GreenScreen"].exists
+        let greenExists = app.any["GreenScreen"].exists
+        return greenExists
     }
 }

@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+let sleepInterval: NSTimeInterval = 1
+
 class Expectation
 {
     let otherData: Any? // maybe this is a string, or some object with properties
@@ -26,13 +28,13 @@ class Expectation
     
     func wait(maxTime: NSTimeInterval = 30) -> Bool
     {
-        return waitForExpectation(self, maxTime: maxTime) != nil
+        return waitForExpectation(self, maxTime: maxTime).first != nil
     }
 }
 
 func waitForAllExpectations(
     expectations: [Expectation],
-    maxTime: NSTimeInterval = 30) -> [Expectation]?
+    maxTime: NSTimeInterval = 30) -> [Expectation]
 {
     let start = NSDate()
 
@@ -55,35 +57,43 @@ func waitForAllExpectations(
         else
         if NSDate().timeIntervalSinceDate(start) >= maxTime
         {
-            return nil
+            return []
+        } else
+        {
+            wait(sleepInterval)
         }
     }
 }
 
 func waitForFirstValidExpectation(
     expectations: [Expectation],
-    maxTime: NSTimeInterval = 30) -> Expectation?
+    maxTime: NSTimeInterval = 30) -> [Expectation]
 {
     let start = NSDate()
     while true
     {
+        print(expectations)
         let passed = expectations.filter({$0.condition()})
         
         if let first = passed.first
         {
-            return first
+            return [first]
         }
         else
         if NSDate().timeIntervalSinceDate(start) >= maxTime
         {
-            return nil
+            return []
+        }
+        else
+        {
+            wait(sleepInterval)
         }
     }
 }
 
 func waitForExpectation(
     expectation: Expectation,
-    maxTime: NSTimeInterval = 30) -> Expectation?
+    maxTime: NSTimeInterval = 30) -> [Expectation]
 {
     return waitForFirstValidExpectation([expectation], maxTime: maxTime)
 }
