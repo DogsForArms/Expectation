@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		6BF43A141C35AD4E001CB690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A131C35AD4E001CB690 /* AppDelegate.swift */; };
-		6BF43A161C35AD4E001CB690 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A151C35AD4E001CB690 /* ViewController.swift */; };
+		6BF43A161C35AD4E001CB690 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A151C35AD4E001CB690 /* FirstViewController.swift */; };
 		6BF43A191C35AD4E001CB690 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF43A171C35AD4E001CB690 /* Main.storyboard */; };
 		6BF43A1B1C35AD4E001CB690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BF43A1A1C35AD4E001CB690 /* Assets.xcassets */; };
 		6BF43A1E1C35AD4E001CB690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF43A1C1C35AD4E001CB690 /* LaunchScreen.storyboard */; };
 		6BF43A291C35AD4E001CB690 /* ExpectationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A281C35AD4E001CB690 /* ExpectationTests.swift */; };
 		6BF43A341C35AD4E001CB690 /* ExpectationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A331C35AD4E001CB690 /* ExpectationUITests.swift */; };
+		6BF43A431C35B14E001CB690 /* FirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A421C35B14E001CB690 /* FirstScreen.swift */; };
+		6BF43A451C35B155001CB690 /* RedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A441C35B155001CB690 /* RedScreen.swift */; };
+		6BF43A471C35B15C001CB690 /* GreenScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A461C35B15C001CB690 /* GreenScreen.swift */; };
+		6BF43A491C35B160001CB690 /* BlueScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A481C35B160001CB690 /* BlueScreen.swift */; };
+		6BF43A4C1C35B1B4001CB690 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A4B1C35B1B4001CB690 /* Helpers.swift */; };
+		6BF43A4E1C35B29F001CB690 /* ScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A4D1C35B29F001CB690 /* ScreenProtocols.swift */; };
+		6BF43A501C35C0B4001CB690 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A4F1C35C0B4001CB690 /* Double.swift */; };
+		6BF43A531C35C3E6001CB690 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A521C35C3E6001CB690 /* Expectation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +44,7 @@
 /* Begin PBXFileReference section */
 		6BF43A101C35AD4E001CB690 /* Expectation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expectation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF43A131C35AD4E001CB690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6BF43A151C35AD4E001CB690 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6BF43A151C35AD4E001CB690 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		6BF43A181C35AD4E001CB690 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6BF43A1A1C35AD4E001CB690 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BF43A1D1C35AD4E001CB690 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +55,15 @@
 		6BF43A2F1C35AD4E001CB690 /* ExpectationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpectationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF43A331C35AD4E001CB690 /* ExpectationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectationUITests.swift; sourceTree = "<group>"; };
 		6BF43A351C35AD4E001CB690 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BF43A421C35B14E001CB690 /* FirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScreen.swift; sourceTree = "<group>"; };
+		6BF43A441C35B155001CB690 /* RedScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedScreen.swift; sourceTree = "<group>"; };
+		6BF43A461C35B15C001CB690 /* GreenScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenScreen.swift; sourceTree = "<group>"; };
+		6BF43A481C35B160001CB690 /* BlueScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueScreen.swift; sourceTree = "<group>"; };
+		6BF43A4B1C35B1B4001CB690 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		6BF43A4D1C35B29F001CB690 /* ScreenProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenProtocols.swift; sourceTree = "<group>"; };
+		6BF43A4F1C35C0B4001CB690 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		6BF43A521C35C3E6001CB690 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
+		6BF43A541C35D966001CB690 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ExpectationUITests/MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +94,7 @@
 		6BF43A071C35AD4E001CB690 = {
 			isa = PBXGroup;
 			children = (
+				6BF43A541C35D966001CB690 /* MyPlayground.playground */,
 				6BF43A121C35AD4E001CB690 /* Expectation */,
 				6BF43A271C35AD4E001CB690 /* ExpectationTests */,
 				6BF43A321C35AD4E001CB690 /* ExpectationUITests */,
@@ -98,7 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				6BF43A131C35AD4E001CB690 /* AppDelegate.swift */,
-				6BF43A151C35AD4E001CB690 /* ViewController.swift */,
+				6BF43A4F1C35C0B4001CB690 /* Double.swift */,
+				6BF43A151C35AD4E001CB690 /* FirstViewController.swift */,
 				6BF43A171C35AD4E001CB690 /* Main.storyboard */,
 				6BF43A1A1C35AD4E001CB690 /* Assets.xcassets */,
 				6BF43A1C1C35AD4E001CB690 /* LaunchScreen.storyboard */,
@@ -119,10 +138,41 @@
 		6BF43A321C35AD4E001CB690 /* ExpectationUITests */ = {
 			isa = PBXGroup;
 			children = (
+				6BF43A511C35C3C6001CB690 /* Expectation */,
+				6BF43A4A1C35B1A8001CB690 /* Helpers */,
+				6BF43A411C35B135001CB690 /* Screens */,
 				6BF43A331C35AD4E001CB690 /* ExpectationUITests.swift */,
 				6BF43A351C35AD4E001CB690 /* Info.plist */,
 			);
 			path = ExpectationUITests;
+			sourceTree = "<group>";
+		};
+		6BF43A411C35B135001CB690 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				6BF43A421C35B14E001CB690 /* FirstScreen.swift */,
+				6BF43A441C35B155001CB690 /* RedScreen.swift */,
+				6BF43A461C35B15C001CB690 /* GreenScreen.swift */,
+				6BF43A481C35B160001CB690 /* BlueScreen.swift */,
+				6BF43A4D1C35B29F001CB690 /* ScreenProtocols.swift */,
+			);
+			name = Screens;
+			sourceTree = "<group>";
+		};
+		6BF43A4A1C35B1A8001CB690 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6BF43A4B1C35B1B4001CB690 /* Helpers.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		6BF43A511C35C3C6001CB690 /* Expectation */ = {
+			isa = PBXGroup;
+			children = (
+				6BF43A521C35C3E6001CB690 /* Expectation.swift */,
+			);
+			name = Expectation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +309,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BF43A161C35AD4E001CB690 /* ViewController.swift in Sources */,
+				6BF43A161C35AD4E001CB690 /* FirstViewController.swift in Sources */,
+				6BF43A501C35C0B4001CB690 /* Double.swift in Sources */,
 				6BF43A141C35AD4E001CB690 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +327,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF43A531C35C3E6001CB690 /* Expectation.swift in Sources */,
+				6BF43A4E1C35B29F001CB690 /* ScreenProtocols.swift in Sources */,
+				6BF43A431C35B14E001CB690 /* FirstScreen.swift in Sources */,
+				6BF43A4C1C35B1B4001CB690 /* Helpers.swift in Sources */,
+				6BF43A471C35B15C001CB690 /* GreenScreen.swift in Sources */,
+				6BF43A451C35B155001CB690 /* RedScreen.swift in Sources */,
 				6BF43A341C35AD4E001CB690 /* ExpectationUITests.swift in Sources */,
+				6BF43A491C35B160001CB690 /* BlueScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
