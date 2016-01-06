@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6BE5A2AE1C3DB18C005069E9 /* protocol.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = protocol.playground; sourceTree = "<group>"; };
 		6BF43A101C35AD4E001CB690 /* Expectation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expectation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF43A131C35AD4E001CB690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BF43A151C35AD4E001CB690 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		6BF43A071C35AD4E001CB690 = {
 			isa = PBXGroup;
 			children = (
+				6BE5A2AE1C3DB18C005069E9 /* protocol.playground */,
 				6BF43A121C35AD4E001CB690 /* Expectation */,
 				6BF43A271C35AD4E001CB690 /* ExpectationTests */,
 				6BF43A321C35AD4E001CB690 /* ExpectationUITests */,

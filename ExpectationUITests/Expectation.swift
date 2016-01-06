@@ -102,5 +102,3 @@ func waitForExpectation(
 {
     return waitForFirstValidExpectation([expectation], maxTime: maxTime)
 }
-
-
