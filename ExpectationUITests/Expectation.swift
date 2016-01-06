@@ -13,22 +13,27 @@ let sleepInterval: NSTimeInterval = 1
 
 class Expectation
 {
-    let otherData: Any? // maybe this is a string, or some object with properties
     private let condition: Void -> Bool
-    init(withCondition condition: Void -> Bool, otherData: Any? = nil)
+    private var onSuccess: (Void -> Void)?
+    init(withCondition condition: Void -> Bool, onSuccess: (Void -> Void)? = nil)
     {
         self.condition = condition
-        self.otherData = otherData
+        self.onSuccess = onSuccess
     }
     
-    func evaluate() -> Bool
+    private func evaluate() -> Bool
     {
-        return self.condition()
+        if self.condition()
+        {
+            self.onSuccess?()
+            return true
+        }
+        return false
     }
     
     func wait(maxTime: NSTimeInterval = 30) -> Bool
     {
-        return waitForExpectation(self, maxTime: maxTime).first != nil
+        return waitForExpectation(self, maxTime: maxTime) != nil
     }
 }
 
@@ -67,22 +72,22 @@ func waitForAllExpectations(
 
 func waitForFirstValidExpectation(
     expectations: [Expectation],
-    maxTime: NSTimeInterval = 30) -> [Expectation]
+    maxTime: NSTimeInterval = 30) -> Expectation?
 {
     let start = NSDate()
     while true
     {
         print(expectations)
-        let passed = expectations.filter({$0.condition()})
+        let passed = expectations.filter({$0.evaluate()})
         
         if let first = passed.first
         {
-            return [first]
+            return first
         }
         else
         if NSDate().timeIntervalSinceDate(start) >= maxTime
         {
-            return []
+            return nil
         }
         else
         {
@@ -93,7 +98,7 @@ func waitForFirstValidExpectation(
 
 func waitForExpectation(
     expectation: Expectation,
-    maxTime: NSTimeInterval = 30) -> [Expectation]
+    maxTime: NSTimeInterval = 30) -> Expectation?
 {
     return waitForFirstValidExpectation([expectation], maxTime: maxTime)
 }

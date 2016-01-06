@@ -26,7 +26,7 @@ class ExpectationUITests: XCTestCase {
     func testTap()
     {
         var times = 0
-        while (times < 4)
+        while (times < 8)
         {
             times++
             goSomeplaceThenGoBack()
@@ -36,23 +36,31 @@ class ExpectationUITests: XCTestCase {
     func goSomeplaceThenGoBack()
     {
         let firstScreen = FirstScreen()
-        let validExpectations = firstScreen.tapGoSomeplace()
+        let result = firstScreen.tapGoSomeplace()
         
-        XCTAssertEqual(validExpectations.count, 1)
+        print("RESULT: \(result)")
         
-        switch validExpectations[0].otherData
+        if let blueScreen = result.wentToBlueScreen
         {
-            case let redScreen as RedScreen:
-                print("it was a redScreen")
-                redScreen.pop()
-            case let blueScreen as BlueScreen:
-                print("do stuff with blueScreen")
-                blueScreen.pop()
-            case let greenScreen as GreenScreen:
-                print("do stuff with greenScreen")
-                greenScreen.pop()
-            default:
-                XCTFail("Something unexpected happened when tappingGoSomeplace()")
+            blueScreen.pop()
+        }
+        else
+        if let greenScreen = result.wentToGreenScreen
+        {
+            greenScreen.pop()
+        }
+        else
+        if let redScreen = result.wentToRedScreen
+        {
+            redScreen.pop()
+        } else
+        if let errMessage = result.errorAppearedSaying
+        {
+            firstScreen.closeTheErrorAlert()
+        }
+        else
+        {
+            XCTFail("Unexpected scenario \(result)")
         }
         
     }
