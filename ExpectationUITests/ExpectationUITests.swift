@@ -23,23 +23,33 @@ class ExpectationUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testTap()
+    func testTap_Structs()
     {
         var times = 0
-        while (times < 8)
+        while (times < 5)
         {
             times++
             goSomeplaceThenGoBack_Structs()
         }
     }
+    func testTap_Enums()
+    {
+        var times = 0
+        while (times < 5)
+        {
+            times++
+            goSomeplaceThenGoBack_Enums()
+        }
+    }
     
+    
+    // pattern 1, structs
     func goSomeplaceThenGoBack_Structs()
     {
         let firstScreen = FirstScreen()
-        let result = firstScreen.tapGoSomeplace()
+        let result = firstScreen.tapGoSomeplace_Struct()
         
-        print("RESULT: \(result)")
-        
+        //typing "result. brings up intellisence
         if let blueScreen = result.wentToBlueScreen
         {
             blueScreen.pop()
@@ -65,9 +75,28 @@ class ExpectationUITests: XCTestCase {
         
     }
     
+    
+    //pattern 2, enums
     func goSomeplaceThenGoBack_Enums()
     {
+        let firstScreen = FirstScreen()
+        let result = firstScreen.tapGoSomeplace_Enum()
         
+        
+        switch result
+        {
+            //intellisence too
+            case .WentToRedScreen(redScreen: let redScreen):
+                redScreen.pop()
+            case .WentToBlueScreen(blueScreen: let blueScreen):
+                blueScreen.pop()
+            case .WentToGreenScreen(greenScreen: let greenScreen):
+                greenScreen.pop()
+            case .ErrorAppearedSaying:
+                firstScreen.closeTheErrorAlert()
+            default:
+                print("Those were all the cases!  If there is another one that is not known, tapGoSomeplace_Enum() will XCTAssert!  It brings the developer to that point to consider if there is now a new case to be added to that function.")
+        }
     }
     
 }

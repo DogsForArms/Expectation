@@ -74,7 +74,7 @@ class FirstScreen : Screen
         case WentToRedScreen( redScreen: RedScreen )
         case WentToBlueScreen( blueScreen: BlueScreen )
         case WentToGreenScreen( greenScreen: GreenScreen )
-        case ErrorAppearedSaying( errorMessage: String )
+        case ErrorAppeared( withMessage: String )
     }
     
     
@@ -95,7 +95,7 @@ class FirstScreen : Screen
             Expectation(withCondition: self.errorAppeared)
             {
                 let message = self.errorContainer.staticTexts.elementBoundByIndex(0).label
-                result = .ErrorAppearedSaying( errorMessage: message )
+                result = .ErrorAppeared( withMessage: message )
             }
         ]
         
