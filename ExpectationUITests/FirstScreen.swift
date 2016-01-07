@@ -31,14 +31,17 @@ class FirstScreen : Screen
     
 
     
-    typealias TapGoSomeplaceResult =   (wentToRedScreen     : RedScreen?,
-                                        wentToBlueScreen    : BlueScreen?,
-                                        wentToGreenScreen   : GreenScreen?,
-                                        errorAppearedSaying : String?)
-    
-    func tapGoSomeplace() -> TapGoSomeplaceResult
+    struct TapGoSomeplaceResult_Struct
     {
-        var result:TapGoSomeplaceResult = (nil, nil, nil, nil)
+        var wentToRedScreen : RedScreen?
+        var wentToBlueScreen : BlueScreen?
+        var wentToGreenScreen: GreenScreen?
+        var errorAppearedSaying : String?
+    }
+
+    func tapGoSomeplace_Struct() -> TapGoSomeplaceResult_Struct
+    {
+        var result = TapGoSomeplaceResult_Struct()
         
         goSomeplace.tap()
         
@@ -59,6 +62,48 @@ class FirstScreen : Screen
         waitForFirstValidExpectation(expectations, maxTime: 60*10)
         
         return result
+    }
+    
+    
+    
+    // pattern 2, return an enum type!  The main benefit is it's easier to add valid cases, and easier for new situations to be visible!
+    //For example, if there is a new case that I haven't thought of, I will fail at the end of tapGoSomeplace_Enum() on the line XCTAssertNotNil(result), 
+    // then I can build a case for that result, since it is now known as a valid outcome of tapGoSomeplace
+    enum TapGoSomeplaceResult_Enum
+    {
+        case WentToRedScreen( redScreen: RedScreen )
+        case WentToBlueScreen( blueScreen: BlueScreen )
+        case WentToGreenScreen( greenScreen: GreenScreen )
+        case ErrorAppearedSaying( errorMessage: String )
+    }
+    
+    
+    func tapGoSomeplace_Enum() -> TapGoSomeplaceResult_Enum
+    {
+        var result: TapGoSomeplaceResult_Enum?
+        
+        goSomeplace.tap()
+        
+        let redScreen = RedScreen()
+        let blueScreen = BlueScreen()
+        let greenScreen = GreenScreen()
+        
+        let expectations = [
+            Expectation(withCondition: redScreen.isVisible) { result = .WentToRedScreen(redScreen: redScreen) },
+            Expectation(withCondition: blueScreen.isVisible) { result = .WentToBlueScreen(blueScreen: blueScreen) },
+            Expectation(withCondition: greenScreen.isVisible) { result = .WentToGreenScreen(greenScreen: greenScreen) },
+            Expectation(withCondition: self.errorAppeared)
+            {
+                let message = self.errorContainer.staticTexts.elementBoundByIndex(0).label
+                result = .ErrorAppearedSaying( errorMessage: message )
+            }
+        ]
+        
+        waitForFirstValidExpectation(expectations, maxTime: 60*10)
+        
+        XCTAssertNotNil(result) //I like this!  Now new developers who encounter new cases will fail right here, and add their case
+        
+        return result!
     }
     
     

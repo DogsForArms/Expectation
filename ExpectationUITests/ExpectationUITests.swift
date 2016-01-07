@@ -29,11 +29,11 @@ class ExpectationUITests: XCTestCase {
         while (times < 8)
         {
             times++
-            goSomeplaceThenGoBack()
+            goSomeplaceThenGoBack_Structs()
         }
     }
     
-    func goSomeplaceThenGoBack()
+    func goSomeplaceThenGoBack_Structs()
     {
         let firstScreen = FirstScreen()
         let result = firstScreen.tapGoSomeplace()
@@ -62,6 +62,11 @@ class ExpectationUITests: XCTestCase {
         {
             XCTFail("Unexpected scenario \(result)")
         }
+        
+    }
+    
+    func goSomeplaceThenGoBack_Enums()
+    {
         
     }
     
