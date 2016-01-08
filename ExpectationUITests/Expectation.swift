@@ -2,103 +2,46 @@
 //  Expectation.swift
 //  Expectation
 //
-//  Created by Ethan Sherr on 12/31/15.
-//  Copyright © 2015 Ethan Sherr. All rights reserved.
+//  Created by Ethan Sherr on 1/8/16.
+//  Copyright © 2016 Ethan Sherr. All rights reserved.
 //
 
 import Foundation
-import XCTest
-
-let sleepInterval: NSTimeInterval = 1
-
-class Expectation
+class Expectation<T> : ExpectationProtocol
 {
-    private let condition: Void -> Bool
-    private var onSuccess: (Void -> Void)?
-    init(withCondition condition: Void -> Bool, onSuccess: (Void -> Void)? = nil)
+    private let condition: () -> Bool
+    
+    init(condition: () -> Bool, getOutcome: () -> Outcome)
     {
         self.condition = condition
-        self.onSuccess = onSuccess
+        self.getOutcome = getOutcome
     }
     
-    private func evaluate() -> Bool
-    {
-        if self.condition()
-        {
-            self.onSuccess?()
-            return true
-        }
-        return false
-    }
     
-    func wait(maxTime: NSTimeInterval = 30) -> Bool
-    {
-        return waitForExpectation(self, maxTime: maxTime) != nil
-    }
-}
-
-func waitForAllExpectations(
-    expectations: [Expectation],
-    maxTime: NSTimeInterval = 30) -> [Expectation]
-{
-    let start = NSDate()
-
-    var satisfiedExpectations = Array<Expectation>()
-    var unsatisfiedExpectations = Array(expectations)
+    //protocol
+    typealias Outcome = T
+    let getOutcome: () -> Outcome
+    var startedEvaluating: NSDate!
+    var maximumTimeAllowed: NSTimeInterval?
+    var minimumTimeToPass: NSTimeInterval?
     
-    while true
+    var lastEvaluationResult: EvaluationResult = .Unknown
+    func evaluate() -> EvaluationResult
     {
-        let partition = unsatisfiedExpectations.partition(0..<unsatisfiedExpectations.count, isOrderedBefore: { (e1, _) -> Bool in
-            return e1.evaluate()
-        })
-        
-        satisfiedExpectations = Array(unsatisfiedExpectations[0..<partition])
-        unsatisfiedExpectations = Array(unsatisfiedExpectations[partition..<unsatisfiedExpectations.count])
-        
-        if satisfiedExpectations.count == expectations.count
+        if lastEvaluationResult == .Unknown
         {
-            return satisfiedExpectations
+            if condition()
+            {
+                lastEvaluationResult = .Success
+            }
+            else
+                if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
+                {
+                    lastEvaluationResult = .Failed
+            }
         }
-        else
-        if NSDate().timeIntervalSinceDate(start) >= maxTime
-        {
-            return []
-        } else
-        {
-            wait(sleepInterval)
-        }
+        
+        return lastEvaluationResult
     }
-}
-
-func waitForFirstValidExpectation(
-    expectations: [Expectation],
-    maxTime: NSTimeInterval = 30) -> Expectation?
-{
-    let start = NSDate()
-    while true
-    {
-        print(expectations)
-        let passed = expectations.filter({$0.evaluate()})
-        
-        if let first = passed.first
-        {
-            return first
-        }
-        else
-        if NSDate().timeIntervalSinceDate(start) >= maxTime
-        {
-            return nil
-        }
-        else
-        {
-            wait(sleepInterval)
-        }
-    }
-}
-
-func waitForExpectation(
-    expectation: Expectation,
-    maxTime: NSTimeInterval = 30) -> Expectation?
-{
-    return waitForFirstValidExpectation([expectation], maxTime: maxTime)
+    func beginEvaluationLoop() {}
 }

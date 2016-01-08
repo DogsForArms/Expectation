@@ -45,11 +45,25 @@
                                     <action selector="goSomeplaceAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iLb-uX-q4A"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3d-KG-yFY">
+                                <rect key="frame" x="218" y="153" width="166" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="intermittentErrorButton"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="R2h-kC-9sD"/>
+                                    <constraint firstAttribute="width" constant="347" id="kCG-eX-fQo"/>
+                                </constraints>
+                                <state key="normal" title="intermittent error button"/>
+                                <connections>
+                                    <action selector="intermittentErrorAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rkh-Vi-Pv2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration" identifier="FirstScreen"/>
                         <constraints>
+                            <constraint firstItem="b3d-KG-yFY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8AY-Pc-Rm6"/>
                             <constraint firstItem="Mke-Nr-vLi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JKI-OM-3NJ"/>
+                            <constraint firstItem="b3d-KG-yFY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="89" id="gxe-aN-Sxt"/>
                             <constraint firstItem="Mke-Nr-vLi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mTf-VY-bap"/>
                         </constraints>
                     </view>

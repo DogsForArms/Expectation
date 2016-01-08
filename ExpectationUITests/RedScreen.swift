@@ -20,6 +20,4 @@ class RedScreen : Screen
         let redExists = app.any["RedScreen"].exists
         return redExists
     }
-
-    
 }

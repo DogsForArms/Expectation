@@ -13,6 +13,7 @@ class FirstScreen : Screen
 {
     private var container: XCUIElement!
     private var goSomeplace: XCUIElement!
+    private var intermittentErrorButton: XCUIElement!
     
     private var errorContainer: XCUIElement!
     
@@ -20,6 +21,7 @@ class FirstScreen : Screen
     {
         container = app.any["FirstScreen"]
         goSomeplace = container.buttons["GoSomeplaceButton"]
+        intermittentErrorButton = container.buttons["intermittentErrorButton"]
         
         errorContainer = app.alerts.element
     }
@@ -29,81 +31,57 @@ class FirstScreen : Screen
         return container.exists
     }
     
-
-    
-    struct TapGoSomeplaceResult_Struct
-    {
-        var wentToRedScreen : RedScreen?
-        var wentToBlueScreen : BlueScreen?
-        var wentToGreenScreen: GreenScreen?
-        var errorAppearedSaying : String?
-    }
-
-    func tapGoSomeplace_Struct() -> TapGoSomeplaceResult_Struct
-    {
-        var result = TapGoSomeplaceResult_Struct()
-        
-        goSomeplace.tap()
-        
-        let redScreen = RedScreen()
-        let blueScreen = BlueScreen()
-        let greenScreen = GreenScreen()
-            
-        let expectations = [
-            Expectation(withCondition: redScreen.isVisible) { result.wentToRedScreen = redScreen },
-            Expectation(withCondition: blueScreen.isVisible) { result.wentToBlueScreen = blueScreen },
-            Expectation(withCondition: greenScreen.isVisible) { result.wentToGreenScreen = greenScreen },
-            Expectation(withCondition: self.errorAppeared)
-            {
-                result.errorAppearedSaying = self.errorContainer.staticTexts.elementBoundByIndex(0).label
-            }
-        ]
-        
-        waitForFirstValidExpectation(expectations, maxTime: 60*10)
-        
-        return result
-    }
-    
-    
-    
-    // pattern 2, return an enum type!  The main benefit is it's easier to add valid cases, and easier for new situations to be visible!
-    //For example, if there is a new case that I haven't thought of, I will fail at the end of tapGoSomeplace_Enum() on the line XCTAssertNotNil(result), 
-    // then I can build a case for that result, since it is now known as a valid outcome of tapGoSomeplace
-    enum TapGoSomeplaceResult_Enum
+    enum TapWentSomeplaceResult
     {
         case WentToRedScreen( redScreen: RedScreen )
-        case WentToBlueScreen( blueScreen: BlueScreen )
         case WentToGreenScreen( greenScreen: GreenScreen )
-        case ErrorAppeared( withMessage: String )
+        case WentToBlueScreen( blueScreen: BlueScreen )
+        case ErrorAppeared
     }
-    
-    
-    func tapGoSomeplace_Enum() -> TapGoSomeplaceResult_Enum
+    func tapGoSomeplace() -> TapWentSomeplaceResult
     {
-        var result: TapGoSomeplaceResult_Enum?
-        
         goSomeplace.tap()
         
         let redScreen = RedScreen()
-        let blueScreen = BlueScreen()
         let greenScreen = GreenScreen()
+        let blueScreen = BlueScreen()
         
-        let expectations = [
-            Expectation(withCondition: redScreen.isVisible) { result = .WentToRedScreen(redScreen: redScreen) },
-            Expectation(withCondition: blueScreen.isVisible) { result = .WentToBlueScreen(blueScreen: blueScreen) },
-            Expectation(withCondition: greenScreen.isVisible) { result = .WentToGreenScreen(greenScreen: greenScreen) },
-            Expectation(withCondition: self.errorAppeared)
-            {
-                let message = self.errorContainer.staticTexts.elementBoundByIndex(0).label
-                result = .ErrorAppeared( withMessage: message )
-            }
+        let exp = [
+            Expectation(condition: redScreen.isVisible)   { TapWentSomeplaceResult.WentToRedScreen( redScreen: redScreen) },
+            Expectation(condition: greenScreen.isVisible) { TapWentSomeplaceResult.WentToGreenScreen( greenScreen: greenScreen) },
+            Expectation(condition: blueScreen.isVisible)  { TapWentSomeplaceResult.WentToBlueScreen( blueScreen: blueScreen) },
+            Expectation(condition: errorAppeared) { TapWentSomeplaceResult.ErrorAppeared }
         ]
         
-        waitForFirstValidExpectation(expectations, maxTime: 60*10)
+        let result = waitForFirstValidExpectation(exp)
         
-        XCTAssertNotNil(result) //I like this!  Now new developers who encounter new cases will fail right here, and add their case
+        XCTAssertNotNil(result)
         
         return result!
+    }
+    
+    
+    enum TapIntermittentErrorResult
+    {
+        case ErrorAppeared
+        case NothingHappened
+    }
+    func tapIntermittentError() -> TapIntermittentErrorResult
+    {
+        intermittentErrorButton.tap()
+        
+        let exp = [
+            NothingHappenedExpectation(somethingHappenedBlock: errorAppeared, within: 5) { TapIntermittentErrorResult.NothingHappened }
+        ]
+        
+        if let result = waitForFirstValidExpectation(exp)
+        {
+            return result
+        }
+        else
+        {
+            return TapIntermittentErrorResult.NothingHappened
+        }
     }
     
     

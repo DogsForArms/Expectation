@@ -23,80 +23,57 @@ class ExpectationUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testTap_Structs()
+    func testTapABunchOfTimes()
     {
         var times = 0
         while (times < 5)
         {
             times++
-            goSomeplaceThenGoBack_Structs()
-        }
-    }
-    func testTap_Enums()
-    {
-        var times = 0
-        while (times < 5)
-        {
-            times++
-            goSomeplaceThenGoBack_Enums()
+            goSomeplaceThenGoBack()
         }
     }
     
-    
-    // pattern 1, structs
-    func goSomeplaceThenGoBack_Structs()
+    func goSomeplaceThenGoBack()
     {
         let firstScreen = FirstScreen()
-        let result = firstScreen.tapGoSomeplace_Struct()
-        
-        //typing "result. brings up intellisence
-        if let blueScreen = result.wentToBlueScreen
-        {
-            blueScreen.pop()
-        }
-        else
-        if let greenScreen = result.wentToGreenScreen
-        {
-            greenScreen.pop()
-        }
-        else
-        if let redScreen = result.wentToRedScreen
-        {
-            redScreen.pop()
-        } else
-        if let errMessage = result.errorAppearedSaying
-        {
-            firstScreen.closeTheErrorAlert()
-        }
-        else
-        {
-            XCTFail("Unexpected scenario \(result)")
-        }
-        
-    }
-    
-    
-    //pattern 2, enums
-    func goSomeplaceThenGoBack_Enums()
-    {
-        let firstScreen = FirstScreen()
-        let result = firstScreen.tapGoSomeplace_Enum()
-        
+        let result = firstScreen.tapGoSomeplace()
         
         switch result
         {
-            //intellisence too
             case .WentToRedScreen(redScreen: let redScreen):
                 redScreen.pop()
-            case .WentToBlueScreen(blueScreen: let blueScreen):
-                blueScreen.pop()
+            
             case .WentToGreenScreen(greenScreen: let greenScreen):
                 greenScreen.pop()
-            case .ErrorAppearedSaying:
-                firstScreen.closeTheErrorAlert()
+            
+            case .WentToBlueScreen(blueScreen: let blueScreen):
+                    blueScreen.pop()
             default:
-                print("Those were all the cases!  If there is another one that is not known, tapGoSomeplace_Enum() will XCTAssert!  It brings the developer to that point to consider if there is now a new case to be added to that function.")
+                print("WOOPS NOT EXPECTED... fail with XCTFail()")
+                //XCTFail()
         }
     }
+    
+    func testIntermittentError()
+    {
+        let firstScreen = FirstScreen()
+        let result = firstScreen.tapIntermittentError()
+        
+        guard case .NothingHappened = result
+        else
+        {
+            XCTFail("The error appeared... \(result)")
+            return;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

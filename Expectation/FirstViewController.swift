@@ -50,5 +50,25 @@ class FirstViewController: UIViewController {
 
     }
 
+    @IBAction func intermittentErrorAction(sender: AnyObject)
+    {
+        let willError = Double.random(0, 1) < 0.5
+        let randomSleep = Double.random(0, 3)
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+        {
+            NSThread.sleepForTimeInterval(randomSleep)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if willError
+                {
+                    let alertView = UIAlertView(
+                        title: "Random Error",
+                        message: "Woops!", delegate: nil,
+                        cancelButtonTitle: "I accept!")
+                    alertView.show()
+                } //otherwise nothing happens
+            })
+        })
+    }
 }
 
