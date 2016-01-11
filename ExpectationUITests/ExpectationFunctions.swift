@@ -41,10 +41,10 @@ private func resetExpectations<T: ExpectationProtocol>(expectations:[T], maxTime
     let startDate = NSDate()
     expectations.forEach {
         (var exp) in
-        exp.beginEvaluationLoop()
         exp.lastEvaluationResult = .Unknown
         exp.startedEvaluating = startDate
         exp.maximumTimeAllowed = exp.minimumTimeToPass ?? maxTime
+        exp.beginEvaluationLoop()
     }
 }
 
@@ -78,14 +78,23 @@ class AllExpectation<T, Z : ExpectationProtocol> :ExpectationProtocol
     func beginEvaluationLoop()
     {
         resetExpectations(expectations, maxTime: self.minimumTimeToPass)
-        expectations.forEach { $0.beginEvaluationLoop() }
+        expectations.forEach
+        {
+            (var e) -> () in
+            e.beginEvaluationLoop()
+            e.maximumTimeAllowed = self.maximumTimeAllowed
+        }
     }
     
+    
+    var val = 0
     var lastEvaluationResult: EvaluationResult = .Unknown
     func evaluate() -> EvaluationResult
     {
         if lastEvaluationResult == .Unknown
         {
+            print(val)
+            val++
             expectations.forEach { $0.evaluate() }
             let totalCount = expectations.count
             let successesCount = expectations.filter { $0.lastEvaluationResult == .Success }.count
@@ -104,12 +113,16 @@ class AllExpectation<T, Z : ExpectationProtocol> :ExpectationProtocol
         return lastEvaluationResult
     }
     
+    func wait(maxTime: NSTimeInterval?) -> T?
+    {
+        return waitForFirstValidExpectation([self], maxTime: maxTime)
+    }
     
 }
 
 func waitForFirstValidExpectation<T: ExpectationProtocol>(
     expectations: [T],
-    maxTime: NSTimeInterval = 30) -> T.Outcome?
+    maxTime: NSTimeInterval? = 30) -> T.Outcome?
 {
     resetExpectations(expectations, maxTime: maxTime)
     

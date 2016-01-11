@@ -15,6 +15,7 @@ class FirstScreen : Screen
     private var goSomeplace: XCUIElement!
     private var intermittentErrorButton: XCUIElement!
     private var changeStuffButton: XCUIElement!
+    private var changeStuffLabel: XCUIElement!
     
     private var errorContainer: XCUIElement!
     
@@ -25,6 +26,8 @@ class FirstScreen : Screen
         intermittentErrorButton = container.buttons["intermittentErrorButton"]
         
         changeStuffButton = container.buttons["changeStuffButton"]
+        changeStuffLabel = container.any["changeStuffLabel"]
+        
         errorContainer = app.alerts.element
     }
     
@@ -92,17 +95,18 @@ class FirstScreen : Screen
     {
         changeStuffButton.tap()
         
-        let result = waitForFirstValidExpectation( [NoChangeExpectation(getValue: {self.changeStuffButton.label}, timeInterval: 10) { return true }], maxTime: 50 )
+        let noChangeInButton = NoChangeExpectation(getValue: {self.changeStuffButton.label}, timeInterval: 10) { return true }
+        let noChangeInLabel = NoChangeExpectation(getValue: {self.changeStuffLabel.label}, timeInterval: 20) { return true }
+        let expectations = [noChangeInButton, noChangeInLabel]
         
-        
-        if let _ = result
-        {
-            
-        }
+        guard let _ = (AllExpectation(expectations: expectations) { return true} ).wait(60)
         else
         {
-            XCTFail()
+            XCTFail();
+            return
         }
+        
+        
     }
     
     
@@ -113,5 +117,10 @@ class FirstScreen : Screen
     func closeTheErrorAlert()
     {
         errorContainer.buttons.elementBoundByIndex(0).tap()
+    }
+    
+    func doEverything()
+    {
+        goSomeplace.tap()
     }
 }

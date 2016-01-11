@@ -113,6 +113,15 @@
                                     <action selector="changeStuffAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fNh-Lf-cac"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="change stuff label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-9n-Myo">
+                                <rect key="frame" x="385" y="495" width="151" height="21"/>
+                                <accessibility key="accessibilityConfiguration" identifier="changeStuffLabel">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3d-KG-yFY">
                                 <rect key="frame" x="126" y="153" width="347" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="intermittentErrorButton"/>
@@ -130,7 +139,9 @@
                         <accessibility key="accessibilityConfiguration" identifier="FirstScreen"/>
                         <constraints>
                             <constraint firstItem="b3d-KG-yFY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8AY-Pc-Rm6"/>
+                            <constraint firstItem="zw2-9n-Myo" firstAttribute="leading" secondItem="HHT-Hx-pbt" secondAttribute="trailing" constant="41" id="J54-8b-4rh"/>
                             <constraint firstItem="Mke-Nr-vLi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JKI-OM-3NJ"/>
+                            <constraint firstItem="HHT-Hx-pbt" firstAttribute="top" secondItem="zw2-9n-Myo" secondAttribute="bottom" constant="-25" id="QWp-EQ-PCo"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HHT-Hx-pbt" secondAttribute="bottom" constant="79" id="epe-TQ-CWG"/>
                             <constraint firstItem="HHT-Hx-pbt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fhe-MO-1Sp"/>
                             <constraint firstItem="b3d-KG-yFY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="89" id="gxe-aN-Sxt"/>
@@ -140,6 +151,7 @@
                     <navigationItem key="navigationItem" id="lGm-sj-CvB"/>
                     <connections>
                         <outlet property="changeStuffButton" destination="HHT-Hx-pbt" id="JcJ-Fd-eL2"/>
+                        <outlet property="changeStuffLabel" destination="zw2-9n-Myo" id="KlY-76-XKg"/>
                         <segue destination="3hK-iO-6Xc" kind="show" identifier="segue1" id="kPx-X6-kzs"/>
                         <segue destination="G1o-Lf-oVn" kind="show" identifier="segue2" id="EUj-2v-8y1"/>
                         <segue destination="eC9-yb-aOb" kind="show" identifier="segue3" id="N4S-Ru-ztF"/>

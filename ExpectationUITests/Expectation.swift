@@ -44,4 +44,9 @@ class Expectation<T> : ExpectationProtocol
         return lastEvaluationResult
     }
     func beginEvaluationLoop() {}
+    
+    func wait(maxTime: NSTimeInterval?) -> T?
+    {
+        return waitForFirstValidExpectation([self], maxTime: maxTime)
+    }
 }

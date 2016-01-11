@@ -75,6 +75,13 @@ class ExpectationUITests: XCTestCase {
     }
     
     
+    func testAllExpectation()
+    {
+        let firstScreen = FirstScreen()
+        firstScreen.doEverything()
+    }
+    
+    
     
     
     

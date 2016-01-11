@@ -71,6 +71,7 @@ class FirstViewController: UIViewController {
         })
     }
     
+    @IBOutlet weak var changeStuffLabel: UILabel!
     @IBOutlet weak var changeStuffButton: UIButton!
     @IBAction func changeStuffAction(sender: AnyObject)
     {
@@ -83,7 +84,22 @@ class FirstViewController: UIViewController {
                 NSThread.sleepForTimeInterval(Double.random(0, 10))
                 dispatch_async(dispatch_get_main_queue(), {
                     changeCount++
-                    self.changeStuffButton.titleLabel!.text = "change \(changeCount)"
+                    let newText = "change \(changeCount)"
+                    self.changeStuffButton.setTitle(newText, forState: .Normal)
+                })
+            })
+        }
+        
+        (1...55).forEach
+        {
+            _ in
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+            {
+                NSThread.sleepForTimeInterval(8 + Double.random(0, 10))
+                dispatch_async(dispatch_get_main_queue(), {
+                    changeCount++
+                    let newText = "change \(changeCount)"
+                    self.changeStuffLabel.text = newText
                 })
             })
         }

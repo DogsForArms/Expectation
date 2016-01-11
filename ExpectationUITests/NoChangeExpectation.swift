@@ -36,18 +36,24 @@ class NoChangeExpectation<T, Z : Equatable> : ExpectationProtocol
             let nextValue = getValue()
             let valueHasChanged = ( nextValue != lastValue )
             
+            print("\(nextValue) -- \(lastValue)")
+            
+            
             if valueHasChanged
             {
+                print("🚷")
                 reset()
             }
             else
             if abs(lastChangeDate.timeIntervalSinceNow) >= timeInterval
             {
+                print("✅")
                 lastEvaluationResult = .Success
             }
             else
             if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
             {
+                print("💀")
                 lastEvaluationResult = .Failed
             }
             lastValue = nextValue
@@ -56,7 +62,7 @@ class NoChangeExpectation<T, Z : Equatable> : ExpectationProtocol
         return lastEvaluationResult
     }
     
-    func reset()
+    private func reset()
     {
         lastChangeDate = NSDate()
         lastValue = getValue()
@@ -66,5 +72,9 @@ class NoChangeExpectation<T, Z : Equatable> : ExpectationProtocol
     func beginEvaluationLoop()
     {
         reset()
+    }
+    func wait(maxTime: NSTimeInterval?) -> T?
+    {
+        return waitForFirstValidExpectation([self], maxTime: maxTime)
     }
 }
