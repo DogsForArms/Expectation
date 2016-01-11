@@ -98,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B4B1DFA1C407B6C0062687D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6BF43A151C35AD4E001CB690 /* FirstViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		6BF43A071C35AD4E001CB690 = {
 			isa = PBXGroup;
 			children = (
@@ -122,9 +130,9 @@
 		6BF43A121C35AD4E001CB690 /* Expectation */ = {
 			isa = PBXGroup;
 			children = (
+				6B4B1DFA1C407B6C0062687D /* ViewControllers */,
 				6BF43A131C35AD4E001CB690 /* AppDelegate.swift */,
 				6BF43A4F1C35C0B4001CB690 /* Double.swift */,
-				6BF43A151C35AD4E001CB690 /* FirstViewController.swift */,
 				6BF43A171C35AD4E001CB690 /* Main.storyboard */,
 				6B4B1DF11C4031110062687D /* MyPlayground.playground */,
 				6BF43A1A1C35AD4E001CB690 /* Assets.xcassets */,

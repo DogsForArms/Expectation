@@ -34,22 +34,22 @@ class NoChangeExpectation<T, Z : Equatable> : ExpectationProtocol
         if lastEvaluationResult == .Unknown
         {
             let nextValue = getValue()
-            let valueHasChanged = ( nextValue == lastValue )
+            let valueHasChanged = ( nextValue != lastValue )
             
             if valueHasChanged
             {
                 reset()
             }
             else
-                if abs(lastChangeDate.timeIntervalSinceNow) >= timeInterval
-                {
-                    lastEvaluationResult = .Success
+            if abs(lastChangeDate.timeIntervalSinceNow) >= timeInterval
+            {
+                lastEvaluationResult = .Success
             }
+            else
             if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
             {
                 lastEvaluationResult = .Failed
             }
-            
             lastValue = nextValue
         }
         

@@ -68,6 +68,12 @@ class ExpectationUITests: XCTestCase {
     }
     
     
+    func testLabelSettles()
+    {
+        let firstScreen = FirstScreen()
+        firstScreen.tapChangeStuffButton()
+    }
+    
     
     
     

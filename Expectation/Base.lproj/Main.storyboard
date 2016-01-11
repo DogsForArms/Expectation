@@ -19,7 +19,63 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7y-9O-jgi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-860" y="382"/>
+            <point key="canvasLocation" x="-1048" y="-286"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="2tg-da-EPc">
+            <objects>
+                <viewController id="Auw-Dy-all" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8pt-5A-owp"/>
+                        <viewControllerLayoutGuide type="bottom" id="V5W-7V-CoM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XhA-er-C5J">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="Fnl-gs-0if"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rQd-hF-TFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-871" y="1650"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="31P-uX-JEQ">
+            <objects>
+                <viewController id="8Mm-Iw-4ad" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="si6-ch-hlh"/>
+                        <viewControllerLayoutGuide type="bottom" id="bNV-66-qfo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E73-YI-ZPI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="lG8-zq-hQ5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A7X-tB-4LW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-871" y="990"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="dlO-ga-R3t">
+            <objects>
+                <tabBarController id="2Q4-lL-eho" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="0g6-Aw-Y2f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8Mm-Iw-4ad" kind="relationship" relationship="viewControllers" id="3Sf-zH-fWl"/>
+                        <segue destination="Auw-Dy-all" kind="relationship" relationship="viewControllers" id="Lsg-7r-dIn"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ewq-f3-yJa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1691" y="1322"/>
         </scene>
         <!--First View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -45,8 +101,20 @@
                                     <action selector="goSomeplaceAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iLb-uX-q4A"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3d-KG-yFY">
-                                <rect key="frame" x="218" y="153" width="166" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHT-Hx-pbt">
+                                <rect key="frame" x="257" y="491" width="87" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="changeStuffButton"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="Jgb-XY-FX0"/>
+                                    <constraint firstAttribute="height" constant="30" id="r6v-bn-XxY"/>
+                                </constraints>
+                                <state key="normal" title="change stuff"/>
+                                <connections>
+                                    <action selector="changeStuffAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fNh-Lf-cac"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3d-KG-yFY">
+                                <rect key="frame" x="126" y="153" width="347" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="intermittentErrorButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="R2h-kC-9sD"/>
@@ -63,12 +131,15 @@
                         <constraints>
                             <constraint firstItem="b3d-KG-yFY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8AY-Pc-Rm6"/>
                             <constraint firstItem="Mke-Nr-vLi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JKI-OM-3NJ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HHT-Hx-pbt" secondAttribute="bottom" constant="79" id="epe-TQ-CWG"/>
+                            <constraint firstItem="HHT-Hx-pbt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fhe-MO-1Sp"/>
                             <constraint firstItem="b3d-KG-yFY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="89" id="gxe-aN-Sxt"/>
                             <constraint firstItem="Mke-Nr-vLi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mTf-VY-bap"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lGm-sj-CvB"/>
                     <connections>
+                        <outlet property="changeStuffButton" destination="HHT-Hx-pbt" id="JcJ-Fd-eL2"/>
                         <segue destination="3hK-iO-6Xc" kind="show" identifier="segue1" id="kPx-X6-kzs"/>
                         <segue destination="G1o-Lf-oVn" kind="show" identifier="segue2" id="EUj-2v-8y1"/>
                         <segue destination="eC9-yb-aOb" kind="show" identifier="segue3" id="N4S-Ru-ztF"/>

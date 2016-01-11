@@ -70,5 +70,25 @@ class FirstViewController: UIViewController {
             })
         })
     }
+    
+    @IBOutlet weak var changeStuffButton: UIButton!
+    @IBAction func changeStuffAction(sender: AnyObject)
+    {
+        var changeCount = 0
+        (1...55).forEach
+        {
+            _ in
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+            {
+                NSThread.sleepForTimeInterval(Double.random(0, 10))
+                dispatch_async(dispatch_get_main_queue(), {
+                    changeCount++
+                    self.changeStuffButton.titleLabel!.text = "change \(changeCount)"
+                })
+            })
+        }
+    }
+    
+    
 }
 
