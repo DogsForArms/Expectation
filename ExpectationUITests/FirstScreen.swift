@@ -52,10 +52,10 @@ class FirstScreen : Screen
         let blueScreen = BlueScreen()
         
         let exp = [
-            Expectation(condition: redScreen.isVisible)   { TapWentSomeplaceResult.WentToRedScreen( redScreen: redScreen) },
-            Expectation(condition: greenScreen.isVisible) { TapWentSomeplaceResult.WentToGreenScreen( greenScreen: greenScreen) },
-            Expectation(condition: blueScreen.isVisible)  { TapWentSomeplaceResult.WentToBlueScreen( blueScreen: blueScreen) },
-            Expectation(condition: errorAppeared) { TapWentSomeplaceResult.ErrorAppeared }
+            Expect(condition: redScreen.isVisible)   { TapWentSomeplaceResult.WentToRedScreen( redScreen: redScreen) },
+            Expect(condition: greenScreen.isVisible) { TapWentSomeplaceResult.WentToGreenScreen( greenScreen: greenScreen) },
+            Expect(condition: blueScreen.isVisible)  { TapWentSomeplaceResult.WentToBlueScreen( blueScreen: blueScreen) },
+            Expect(condition: errorAppeared) { TapWentSomeplaceResult.ErrorAppeared }
         ]
         
         let result = waitForFirstValidExpectation(exp)
@@ -76,7 +76,7 @@ class FirstScreen : Screen
         intermittentErrorButton.tap()
         
         let exp = [
-            NothingHappenedExpectation(somethingHappenedBlock: errorAppeared, within: 5) { TapIntermittentErrorResult.NothingHappened }
+            ExpectNever(somethingHappenedBlock: errorAppeared, within: 5) { TapIntermittentErrorResult.NothingHappened }
         ]
         
         if let result = waitForFirstValidExpectation(exp)
@@ -95,11 +95,11 @@ class FirstScreen : Screen
     {
         changeStuffButton.tap()
         
-        let noChangeInButton = SettleExpectation(getValue: {self.changeStuffButton.label}, timeInterval: 10) { return true }
-        let noChangeInLabel = SettleExpectation(getValue: {self.changeStuffLabel.label}, timeInterval: 20) { return true }
+        let noChangeInButton = ExpectSettle(getValue: {self.changeStuffButton.label}, timeInterval: 10) { return "NoChangeInButtonExp" }
+        let noChangeInLabel = ExpectSettle(getValue: {self.changeStuffLabel.label}, timeInterval: 20) { return "NoChangeInLabelExp" }
         let expectations = [noChangeInButton, noChangeInLabel]
         
-        guard let _ = (AllExpectation(expectations: expectations) { return true} ).wait(60)
+        guard let _ = (ExpectAll(expectations: expectations) { return true} ).wait(60)
         else
         {
             XCTFail();

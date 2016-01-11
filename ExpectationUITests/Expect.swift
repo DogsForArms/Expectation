@@ -1,5 +1,5 @@
 //
-//  NothingHappenedExpectation.swift
+//  Expectation.swift
 //  Expectation
 //
 //  Created by Ethan Sherr on 1/8/16.
@@ -7,19 +7,18 @@
 //
 
 import Foundation
-class NothingHappenedExpectation<T> : ExpectationProtocol
+class Expect<T> : ExpectationProtocol
 {
-    private let somethingHappenedBlock: () -> Bool
-    private let timeInterval: NSTimeInterval
+    private let condition: () -> Bool
     
-    
-    init(somethingHappenedBlock: () -> Bool, within timeInterval: NSTimeInterval, getOutcome: () -> Outcome)
+    init(condition: () -> Bool, getOutcome: () -> Outcome)
     {
-        self.somethingHappenedBlock = somethingHappenedBlock
-        self.timeInterval = timeInterval
+        self.condition = condition
         self.getOutcome = getOutcome
     }
     
+    
+    //protocol
     typealias Outcome = T
     let getOutcome: () -> Outcome
     var startedEvaluating: NSDate!
@@ -31,24 +30,21 @@ class NothingHappenedExpectation<T> : ExpectationProtocol
     {
         if lastEvaluationResult == .Unknown
         {
-            if somethingHappenedBlock()
-            {
-                lastEvaluationResult = .Failed
-            }
-            else
-            if abs(startedEvaluating.timeIntervalSinceNow) >= timeInterval
+            if condition()
             {
                 lastEvaluationResult = .Success
             }
-            else if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
-            {
-                lastEvaluationResult = .Failed
+            else
+                if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
+                {
+                    lastEvaluationResult = .Failed
             }
         }
         
         return lastEvaluationResult
     }
     func beginEvaluationLoop() {}
+    
     func wait(maxTime: NSTimeInterval?) -> T?
     {
         return waitForFirstValidExpectation([self], maxTime: maxTime)

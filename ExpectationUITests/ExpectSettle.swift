@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class SettleExpectation<T, Z : Equatable> : ExpectationProtocol
+class ExpectSettle<T, Z : Equatable> : ExpectationProtocol
 {
     private let getValue:() -> Z
     private let timeInterval: NSTimeInterval

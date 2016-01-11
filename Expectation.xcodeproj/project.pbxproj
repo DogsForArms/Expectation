@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B4B1DF51C4077890062687D /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DF41C4077890062687D /* Expectation.swift */; };
-		6B4B1DF71C40779B0062687D /* NothingHappenedExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DF61C40779B0062687D /* NothingHappenedExpectation.swift */; };
-		6B4B1DF91C4077D60062687D /* SettleExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DF81C4077D60062687D /* SettleExpectation.swift */; };
+		6B4B1DF51C4077890062687D /* Expect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DF41C4077890062687D /* Expect.swift */; };
+		6B4B1DF71C40779B0062687D /* ExpectNever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DF61C40779B0062687D /* ExpectNever.swift */; };
+		6B4B1DF91C4077D60062687D /* ExpectSettle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DF81C4077D60062687D /* ExpectSettle.swift */; };
+		6B4B1DFC1C4418C40062687D /* ExpectAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B1DFB1C4418C40062687D /* ExpectAll.swift */; };
 		6BE5A2B01C3F070C005069E9 /* ExpectationFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE5A2AF1C3F070C005069E9 /* ExpectationFunctions.swift */; };
 		6BF43A141C35AD4E001CB690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A131C35AD4E001CB690 /* AppDelegate.swift */; };
 		6BF43A161C35AD4E001CB690 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF43A151C35AD4E001CB690 /* FirstViewController.swift */; };
@@ -46,9 +47,10 @@
 
 /* Begin PBXFileReference section */
 		6B4B1DF11C4031110062687D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
-		6B4B1DF41C4077890062687D /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
-		6B4B1DF61C40779B0062687D /* NothingHappenedExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NothingHappenedExpectation.swift; sourceTree = "<group>"; };
-		6B4B1DF81C4077D60062687D /* SettleExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettleExpectation.swift; sourceTree = "<group>"; };
+		6B4B1DF41C4077890062687D /* Expect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expect.swift; sourceTree = "<group>"; };
+		6B4B1DF61C40779B0062687D /* ExpectNever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectNever.swift; sourceTree = "<group>"; };
+		6B4B1DF81C4077D60062687D /* ExpectSettle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectSettle.swift; sourceTree = "<group>"; };
+		6B4B1DFB1C4418C40062687D /* ExpectAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectAll.swift; sourceTree = "<group>"; };
 		6BE5A2AE1C3DB18C005069E9 /* protocol.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = protocol.playground; sourceTree = "<group>"; };
 		6BE5A2AF1C3F070C005069E9 /* ExpectationFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectationFunctions.swift; sourceTree = "<group>"; };
 		6BF43A101C35AD4E001CB690 /* Expectation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expectation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,9 +189,10 @@
 			isa = PBXGroup;
 			children = (
 				6BE5A2AF1C3F070C005069E9 /* ExpectationFunctions.swift */,
-				6B4B1DF81C4077D60062687D /* SettleExpectation.swift */,
-				6B4B1DF61C40779B0062687D /* NothingHappenedExpectation.swift */,
-				6B4B1DF41C4077890062687D /* Expectation.swift */,
+				6B4B1DFB1C4418C40062687D /* ExpectAll.swift */,
+				6B4B1DF81C4077D60062687D /* ExpectSettle.swift */,
+				6B4B1DF61C40779B0062687D /* ExpectNever.swift */,
+				6B4B1DF41C4077890062687D /* Expect.swift */,
 			);
 			name = Expectation;
 			sourceTree = "<group>";
@@ -346,17 +349,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4B1DFC1C4418C40062687D /* ExpectAll.swift in Sources */,
 				6BF43A4E1C35B29F001CB690 /* ScreenProtocols.swift in Sources */,
 				6BF43A431C35B14E001CB690 /* FirstScreen.swift in Sources */,
 				6BF43A4C1C35B1B4001CB690 /* Helpers.swift in Sources */,
-				6B4B1DF71C40779B0062687D /* NothingHappenedExpectation.swift in Sources */,
+				6B4B1DF71C40779B0062687D /* ExpectNever.swift in Sources */,
 				6BF43A471C35B15C001CB690 /* GreenScreen.swift in Sources */,
-				6B4B1DF51C4077890062687D /* Expectation.swift in Sources */,
+				6B4B1DF51C4077890062687D /* Expect.swift in Sources */,
 				6BE5A2B01C3F070C005069E9 /* ExpectationFunctions.swift in Sources */,
 				6BF43A451C35B155001CB690 /* RedScreen.swift in Sources */,
 				6BF43A341C35AD4E001CB690 /* ExpectationUITests.swift in Sources */,
 				6BF43A491C35B160001CB690 /* BlueScreen.swift in Sources */,
-				6B4B1DF91C4077D60062687D /* SettleExpectation.swift in Sources */,
+				6B4B1DF91C4077D60062687D /* ExpectSettle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
