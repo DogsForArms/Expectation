@@ -34,7 +34,7 @@ protocol ExpectationProtocol
     func evaluate() -> EvaluationResult
 }
 
-private let sleepInterval: NSTimeInterval = 1
+private let sleepInterval: NSTimeInterval = 1.5
 
 func resetExpectations<T: ExpectationProtocol>(expectations:[T], maxTime: NSTimeInterval?)
 {
@@ -52,9 +52,18 @@ func resetExpectations<T: ExpectationProtocol>(expectations:[T], maxTime: NSTime
 
 func waitForFirstValidExpectation<T: ExpectationProtocol>(
     expectations: [T],
-    maxTime: NSTimeInterval? = 30) -> T.Outcome?
+    var maxTime: NSTimeInterval? = 30) -> T.Outcome?
 {
+    
+    expectations.forEach {
+        if let minTimeForExpectationToPass = $0.minimumTimeToPass where minTimeForExpectationToPass > maxTime
+        {
+            print("Extending expectation period from \(maxTime) to \(minTimeForExpectationToPass)")
+            maxTime = minTimeForExpectationToPass
+        }
+    }
     resetExpectations(expectations, maxTime: maxTime)
+    
     
     while true
     {
@@ -67,8 +76,9 @@ func waitForFirstValidExpectation<T: ExpectationProtocol>(
         if let first = passed.first
         {
             XCTAssertEqual(passed.count, 1, "waitForFirstValidExpectation expects that expectations provided are mutually exclusive - \(passed.count) Expectations have passed.")
-            print("✅")
-            return first.getOutcome()
+            let outcome = first.getOutcome()
+            print("✅ \(outcome)")
+            return outcome
         }
         else
         if pendingExpectationsCount == 0 //|| NSDate().timeIntervalSinceDate(start) >= maxTime //refactor idea, move this to Expectation itself.
@@ -91,4 +101,16 @@ func waitForExpectation<T: ExpectationProtocol>(
     maxTime: NSTimeInterval = 30) -> T.Outcome?
 {
     return waitForFirstValidExpectation([expectation])
+}
+
+class ExpectationBase
+{
+    var verbose = true
+    func log(items: Any)
+    {
+        if verbose
+        {
+            print(items)
+        }
+    }
 }

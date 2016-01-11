@@ -75,17 +75,15 @@ class FirstScreen : Screen
     {
         intermittentErrorButton.tap()
         
-        let exp = [
-            ExpectNever(somethingHappenedBlock: errorAppeared, within: 5) { TapIntermittentErrorResult.NothingHappened }
-        ]
+        let exp = ExpectNever(somethingHappenedBlock: errorAppeared, within: 5) { TapIntermittentErrorResult.NothingHappened }
         
-        if let result = waitForFirstValidExpectation(exp)
+        if let result = exp.wait(10)
         {
             return result
         }
         else
         {
-            return TapIntermittentErrorResult.NothingHappened
+            return TapIntermittentErrorResult.ErrorAppeared
         }
     }
     
@@ -105,8 +103,6 @@ class FirstScreen : Screen
             XCTFail();
             return
         }
-        
-        
     }
     
     
@@ -119,8 +115,5 @@ class FirstScreen : Screen
         errorContainer.buttons.elementBoundByIndex(0).tap()
     }
     
-    func doEverything()
-    {
-        goSomeplace.tap()
-    }
+
 }

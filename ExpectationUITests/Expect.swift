@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Expect<T> : ExpectationProtocol
+class Expect<T> : ExpectationBase, ExpectationProtocol
 {
     private let condition: () -> Bool
     
@@ -15,6 +15,7 @@ class Expect<T> : ExpectationProtocol
     {
         self.condition = condition
         self.getOutcome = getOutcome
+        super.init()
     }
     
     
@@ -35,9 +36,9 @@ class Expect<T> : ExpectationProtocol
                 lastEvaluationResult = .Success
             }
             else
-                if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
-                {
-                    lastEvaluationResult = .Failed
+            if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
+            {
+                lastEvaluationResult = .Failed
             }
         }
         

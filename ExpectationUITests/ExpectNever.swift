@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class ExpectNever<T> : ExpectationProtocol
+class ExpectNever<T> : ExpectationBase, ExpectationProtocol
 {
     private let somethingHappenedBlock: () -> Bool
     private let timeInterval: NSTimeInterval
@@ -19,6 +19,7 @@ class ExpectNever<T> : ExpectationProtocol
         self.timeInterval = timeInterval
         self.minimumTimeToPass = timeInterval
         self.getOutcome = getOutcome
+        super.init()
     }
     
     typealias Outcome = T
@@ -34,19 +35,16 @@ class ExpectNever<T> : ExpectationProtocol
         {
             if somethingHappenedBlock()
             {
+                log("💀, ExpectNever failed, event occured within \(timeInterval)")
                 lastEvaluationResult = .Failed
             }
             else
-            if abs(startedEvaluating.timeIntervalSinceNow) >= timeInterval
+            if  abs(startedEvaluating.timeIntervalSinceNow) >= timeInterval ||
+                abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
             {
                 lastEvaluationResult = .Success
             }
-            else if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
-            {
-                lastEvaluationResult = .Failed
-            }
         }
-        
         return lastEvaluationResult
     }
     func beginEvaluationLoop() {}

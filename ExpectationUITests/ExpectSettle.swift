@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class ExpectSettle<T, Z : Equatable> : ExpectationProtocol
+class ExpectSettle<T, Z : Equatable> : ExpectationBase, ExpectationProtocol
 {
     private let getValue:() -> Z
     private let timeInterval: NSTimeInterval
@@ -19,6 +19,7 @@ class ExpectSettle<T, Z : Equatable> : ExpectationProtocol
         self.getValue = getValue
         self.timeInterval = timeInterval
         self.getOutcome = getOutcome
+        super.init()
     }
     
     //protocol
@@ -38,23 +39,29 @@ class ExpectSettle<T, Z : Equatable> : ExpectationProtocol
             
             print("\(nextValue) -- \(lastValue)")
             
+            let timeSinceLastSettleAttempt = abs(lastChangeDate.timeIntervalSinceNow)
+            let timeSinceStart = abs(startedEvaluating.timeIntervalSinceNow)
             
             if valueHasChanged
             {
-                print("🚷")
+                log("🚷 change detected, Reset")
                 reset()
             }
             else
-            if abs(lastChangeDate.timeIntervalSinceNow) >= timeInterval
+            if timeSinceLastSettleAttempt >= timeInterval
             {
-                print("✅")
+                log("🚙 settled in \(timeSinceStart) seconds")
                 lastEvaluationResult = .Success
             }
             else
-            if abs(startedEvaluating.timeIntervalSinceNow) > maximumTimeAllowed
+            if timeSinceStart > maximumTimeAllowed
             {
-                print("💀")
+                log("💀")
                 lastEvaluationResult = .Failed
+            }
+            else
+            {
+                log("⏸ \(Int(100*timeSinceLastSettleAttempt/timeInterval))% - (\(Int(timeSinceLastSettleAttempt))s/\(timeInterval)s)")
             }
             lastValue = nextValue
         }
