@@ -1,5 +1,5 @@
 //
-//  NoChangeExpectation.swift
+//  SettleExpectation.swift
 //  Expectation
 //
 //  Created by Ethan Sherr on 1/8/16.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class NoChangeExpectation<T, Z : Equatable> : ExpectationProtocol
+class SettleExpectation<T, Z : Equatable> : ExpectationProtocol
 {
     private let getValue:() -> Z
     private let timeInterval: NSTimeInterval

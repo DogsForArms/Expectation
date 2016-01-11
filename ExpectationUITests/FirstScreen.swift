@@ -95,8 +95,8 @@ class FirstScreen : Screen
     {
         changeStuffButton.tap()
         
-        let noChangeInButton = NoChangeExpectation(getValue: {self.changeStuffButton.label}, timeInterval: 10) { return true }
-        let noChangeInLabel = NoChangeExpectation(getValue: {self.changeStuffLabel.label}, timeInterval: 20) { return true }
+        let noChangeInButton = SettleExpectation(getValue: {self.changeStuffButton.label}, timeInterval: 10) { return true }
+        let noChangeInLabel = SettleExpectation(getValue: {self.changeStuffLabel.label}, timeInterval: 20) { return true }
         let expectations = [noChangeInButton, noChangeInLabel]
         
         guard let _ = (AllExpectation(expectations: expectations) { return true} ).wait(60)
